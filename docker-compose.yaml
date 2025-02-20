@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://user:password@db:3306/chatbot_db
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+  
+  db:
+    image: mysql:9
+    environment:
+      - MYSQL_DATABASE=chatbot_db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    ports:
+      - "3306:3306"
