@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,9 +77,9 @@ WSGI_APPLICATION = "chatterbox.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "chatbot_db",
-        "USER": "user",
-        "PASSWORD": "password",
+        "NAME": config("MYSQL_DATABASE"),
+        "USER": config("MYSQL_USER"),
+        "PASSWORD": config("MYSQL_PASSWORD"),
         "HOST": "db",
         "PORT": "3306",
     }

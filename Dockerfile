@@ -2,6 +2,7 @@ FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -15,4 +16,5 @@ WORKDIR /app
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt --no-cache-dir
 
-COPY ./chatterbox /app/
+COPY ./chatterbox .
+COPY .env .
