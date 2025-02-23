@@ -2,8 +2,6 @@ services:
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
-    # volumes:
-    #   - .:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -11,6 +9,8 @@ services:
         condition: service_healthy
     environment:
       - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+    env_file:
+      - .env
   db:
     image: mysql:9
     environment:
